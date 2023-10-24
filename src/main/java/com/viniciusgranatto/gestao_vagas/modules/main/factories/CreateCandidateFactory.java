@@ -1,6 +1,5 @@
 package com.viniciusgranatto.gestao_vagas.modules.main.factories;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,8 +18,8 @@ import jakarta.validation.Valid;
 @RequestMapping("/candidate")
 public class CreateCandidateFactory {
   
-  @Autowired
-  private CreateCandidateRepository createCandidateRepository;
+  
+  private CreateCandidateRepository createCandidateRepository = new CreateCandidateRepository();
   private CreateCandidateService createCandidateService = new CreateCandidateService(this.createCandidateRepository);
   private CandidateController candidateController = new CandidateController(this.createCandidateService);
   
