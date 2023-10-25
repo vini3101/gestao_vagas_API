@@ -1,16 +1,21 @@
 package com.viniciusgranatto.gestao_vagas.modules.infra.repositories.candidate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.viniciusgranatto.gestao_vagas.modules.data.repositories.candidate.ICreateCandidateRepository;
 import com.viniciusgranatto.gestao_vagas.modules.domain.dtos.candidate.CreateCandidateDTO;
 import com.viniciusgranatto.gestao_vagas.modules.infra.entities.candidate.CandidateEntity;
-import com.viniciusgranatto.gestao_vagas.modules.infra.jpa_repositories.candidate.CandidateRepository;
+import com.viniciusgranatto.gestao_vagas.modules.infra.jpa_repositories.candidate.CandidateJPARepository;
 
+
+@Repository
 public class CreateCandidateRepository implements ICreateCandidateRepository {
+ 
   @Autowired
-  private CandidateRepository candidateRepository;
+  private CandidateJPARepository candidateJPARepository;
 
+  @Override
   public CreateCandidateDTO execute(CreateCandidateDTO createCandidateDTO) {
     CandidateEntity candidateEntity = new CandidateEntity();
     candidateEntity.setName(createCandidateDTO.getName());
@@ -18,8 +23,8 @@ public class CreateCandidateRepository implements ICreateCandidateRepository {
     candidateEntity.setEmail(createCandidateDTO.getEmail());
     candidateEntity.setPassword(createCandidateDTO.getPassword());
     candidateEntity.setCurriculum(createCandidateDTO.getCurriculum());
-  
-    var createdCandidateEntity = this.candidateRepository.save(candidateEntity);
+
+    var createdCandidateEntity = this.candidateJPARepository.save(candidateEntity);
 
     CreateCandidateDTO createdCandidateDTO = new CreateCandidateDTO();
     createdCandidateDTO.setName(createdCandidateEntity.getName());
@@ -29,5 +34,6 @@ public class CreateCandidateRepository implements ICreateCandidateRepository {
     createdCandidateDTO.setCurriculum(createdCandidateEntity.getCurriculum());
 
     return createdCandidateDTO;
+    
   }
 }
