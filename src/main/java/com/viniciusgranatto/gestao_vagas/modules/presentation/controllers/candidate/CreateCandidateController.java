@@ -9,12 +9,12 @@ import com.viniciusgranatto.gestao_vagas.modules.domain.dtos.candidate.CreateCan
 import com.viniciusgranatto.gestao_vagas.modules.domain.exceptions.candidate.CandidateFoundException;
 
 @Controller
-public class CandidateController {
+public class CreateCandidateController {
   
   @Autowired
   private CreateCandidateService createCandidateService;
 
-  public CandidateController(CreateCandidateService createCandidateService) {
+  public CreateCandidateController(CreateCandidateService createCandidateService) {
     this.createCandidateService = createCandidateService;
   }
 
