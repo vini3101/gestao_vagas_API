@@ -1,4 +1,4 @@
-package com.viniciusgranatto.gestao_vagas.modules.infra.entities.candidate;
+package com.viniciusgranatto.gestao_vagas.modules.infra.entities.company;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -15,14 +15,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
+@Entity(name = "company")
 @Data
-@Entity(name = "candidate")
-public class CandidateEntity {
+public class CompanyEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
-
-  private String name;
 
   @NotBlank(message = "Username cannot be blank")
   @Pattern(regexp = "\\S+", message = "Username cannot have space")
@@ -34,7 +32,11 @@ public class CandidateEntity {
   @Length(min = 8, message = "Password should have at least 8 characters")
   private String password;
 
-  private String curriculum;
+  private String website;
+
+  private String name;
+
+  private String description;
 
   @CreationTimestamp
   private LocalDateTime createdAt;
