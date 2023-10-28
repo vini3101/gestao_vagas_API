@@ -1,6 +1,7 @@
 package com.viniciusgranatto.gestao_vagas.modules.infra.repositories.company;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.viniciusgranatto.gestao_vagas.modules.data.repositories.company.ICreateCompanyRepository;
@@ -14,11 +15,14 @@ public class CreateCompanyRepository implements ICreateCompanyRepository {
   @Autowired
   private CompanyJPARepository companyJPARepository;
 
+  @Autowired
+  private PasswordEncoder passwordEncoder;
+
   public CreateCompanyDTO execute(CreateCompanyDTO createCompanyDTO) {
     CompanyEntity companyEntity = new CompanyEntity();
     companyEntity.setUsername(createCompanyDTO.getUsername());
     companyEntity.setEmail(createCompanyDTO.getEmail());
-    companyEntity.setPassword(createCompanyDTO.getPassword());
+    companyEntity.setPassword(passwordEncoder.encode(createCompanyDTO.getPassword()));
     companyEntity.setName(createCompanyDTO.getName());
     companyEntity.setWebsite(createCompanyDTO.getWebsite());
     companyEntity.setDescription(createCompanyDTO.getDescription());
